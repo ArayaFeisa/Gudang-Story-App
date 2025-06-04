@@ -1,0 +1,104 @@
+#main-content {
+  padding-block: 2rem;
+}
+
+#main-content h2 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #333;
+}
+
+.story-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.story-item {
+  display: flex;
+  align-items: flex-start;
+  background-color: #f7eed3;
+  border: 1px solid #000;
+  border-radius: 10px;
+  padding: 1rem;
+  box-shadow: 0 0 10px #00000010;
+  transition: transform 0.2s ease;
+}
+
+.story-item:hover {
+  transform: translateY(-2px);
+}
+
+.story-img {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-right: 1rem;
+}
+
+.story-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.story-content h4 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #674636;
+}
+
+.story-content p {
+  font-size: 1rem;
+  color: #444;
+  margin: 0;
+}
+
+.story-content small {
+  font-size: 0.875rem;
+  color: #777;
+}
+
+.delete-button {
+  align-self: start;
+  background-color: #b33a3a;
+  border: none;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.3s ease;
+  margin-top: 0.5rem;
+}
+
+.delete-button:hover {
+  background-color: #d94f4f;
+}
+
+@media (max-width: 768px) {
+  .story-item {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .story-img {
+    margin-right: 0;
+    margin-bottom: 1rem;
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+  }
+
+  .story-content h4 {
+    font-size: 1.1rem;
+  }
+
+  .story-content p {
+    font-size: 0.95rem;
+  }
+}
