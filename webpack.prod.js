@@ -51,7 +51,7 @@ module.exports = merge(common, {
             cacheName: "static-resources",
           },
         },
-        
+
         {
           urlPattern: /^https:\/\/(api\.example\.com|another\.api\.com)/,
           handler: "NetworkFirst",

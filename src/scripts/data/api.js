@@ -24,25 +24,25 @@ const Api = {
 
   // untuk fallback offline dgn memanggil indexedDB
   async getAllStories(token, { page = 1, size = 10, location = 0 } = {}) {
-  const url = new URL(`${ENDPOINT}/stories`);
-  url.searchParams.append("page", page);
-  url.searchParams.append("size", size);
-  url.searchParams.append("location", location);
+    const url = new URL(`${ENDPOINT}/stories`);
+    url.searchParams.append("page", page);
+    url.searchParams.append("size", size);
+    url.searchParams.append("location", location);
 
-  try {
-    const response = await fetch(url, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+    try {
+      const response = await fetch(url, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
-    const json = await response.json();
-    return json;
-  } catch (error) {
-    console.warn("Fetch gagal, mengambil data dari IndexedDB", error);
-    const offlineStories = await StoryIDB.getAllStories();
+      const json = await response.json();
+      return json;
+    } catch (error) {
+      console.warn("Fetch gagal, mengambil data dari IndexedDB", error);
+      const offlineStories = await StoryIDB.getAllStories();
 
-    return { listStory: offlineStories };
-  }
-},
+      return { listStory: offlineStories };
+    }
+  },
 
   async getStoryDetail(storyId, token) {
     const response = await fetch(`${ENDPOINT}/stories/${storyId}`, {
@@ -89,10 +89,20 @@ const Api = {
       endpoint: subscription.endpoint,
       keys: {
         p256dh: subscription.getKey("p256dh")
-          ? btoa(String.fromCharCode.apply(null, new Uint8Array(subscription.getKey("p256dh"))))
+          ? btoa(
+              String.fromCharCode.apply(
+                null,
+                new Uint8Array(subscription.getKey("p256dh")),
+              ),
+            )
           : "",
         auth: subscription.getKey("auth")
-          ? btoa(String.fromCharCode.apply(null, new Uint8Array(subscription.getKey("auth"))))
+          ? btoa(
+              String.fromCharCode.apply(
+                null,
+                new Uint8Array(subscription.getKey("auth")),
+              ),
+            )
           : "",
       },
     };

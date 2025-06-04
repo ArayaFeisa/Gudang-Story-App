@@ -1,7 +1,7 @@
-import loadingPopupView from './loading-popup-view.js';
+import loadingPopupView from "./loading-popup-view.js";
 
 const LoadingPopupPresenter = {
-  showLoading(message = 'Loading...') {
+  showLoading(message = "Loading...") {
     loadingPopupView.show(message);
   },
   updateMessage(message) {

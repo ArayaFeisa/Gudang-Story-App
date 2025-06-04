@@ -1,8 +1,8 @@
 // Membuat class LoadingPopup untuk manajemen pop up animasi
 class LoadingPopup {
   constructor() {
-    this.popupElement = document.createElement('div');
-    this.popupElement.classList.add('loading-popup');
+    this.popupElement = document.createElement("div");
+    this.popupElement.classList.add("loading-popup");
     this.popupElement.innerHTML = `
       <div class="loading-popup-content">
         <div class="loading-spinner"></div>
@@ -13,17 +13,18 @@ class LoadingPopup {
     this.hide();
   }
 
-  show(message = 'Loading...') {
-    this.popupElement.querySelector('.loading-message').textContent = message;
-    this.popupElement.style.display = 'flex';
+  show(message = "Loading...") {
+    this.popupElement.querySelector(".loading-message").textContent = message;
+    this.popupElement.style.display = "flex";
   }
 
   updateMessage(newMessage) {
-    this.popupElement.querySelector('.loading-message').textContent = newMessage;
+    this.popupElement.querySelector(".loading-message").textContent =
+      newMessage;
   }
 
   hide() {
-    this.popupElement.style.display = 'none';
+    this.popupElement.style.display = "none";
   }
 }
 

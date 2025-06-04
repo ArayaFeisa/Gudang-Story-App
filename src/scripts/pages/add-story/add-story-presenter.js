@@ -102,9 +102,14 @@ const AddStoryPresenter = {
 
         message.innerText = "Story berhasil ditambahkan!";
 
-        if (cameraStream) cameraStream.getTracks().forEach((track) => track.stop());
+        if (cameraStream)
+          cameraStream.getTracks().forEach((track) => track.stop());
 
-        await sendPushNotification("Story berhasil diunggah!", "Cerita Anda berhasil ditambahkan.", "/home");
+        await sendPushNotification(
+          "Story berhasil diunggah!",
+          "Cerita Anda berhasil ditambahkan.",
+          "/home",
+        );
         window.location.hash = "/home";
       } catch (err) {
         message.innerText = `Gagal menambahkan story: ${err.message}`;

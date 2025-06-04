@@ -8,9 +8,7 @@ const NotFoundView = {
     `;
   },
 
-  afterRender() {
-    
-  },
+  afterRender() {},
 };
 
 export default NotFoundView;

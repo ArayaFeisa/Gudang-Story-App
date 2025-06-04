@@ -1,2 +1,1 @@
 # Gudang-Story-App
-

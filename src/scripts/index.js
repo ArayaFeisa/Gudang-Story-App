@@ -66,7 +66,8 @@ document.addEventListener("DOMContentLoaded", async () => {
   if ("serviceWorker" in navigator && "PushManager" in window) {
     window.addEventListener("load", async () => {
       try {
-        const registration = await navigator.serviceWorker.register("/service-worker.js");
+        const registration =
+          await navigator.serviceWorker.register("/service-worker.js");
         console.log("Service Worker registered:", registration);
 
         const updatePushButton = async () => {
@@ -81,65 +82,70 @@ document.addEventListener("DOMContentLoaded", async () => {
         updatePushButton();
 
         pushSubBtn?.addEventListener("click", async () => {
-  const subscription = await registration.pushManager.getSubscription();
+          const subscription = await registration.pushManager.getSubscription();
 
-  if (subscription) {
-    LoadingPopupPresenter.showLoading('Memproses berhenti langganan...');
+          if (subscription) {
+            LoadingPopupPresenter.showLoading(
+              "Memproses berhenti langganan...",
+            );
 
-    try {
-      await subscription.unsubscribe();
-      console.log("Unsubscribed dari push server");
+            try {
+              await subscription.unsubscribe();
+              console.log("Unsubscribed dari push server");
 
-      const token = AuthModel.getToken();
-      if (token) {
-        await Api.unsubscribeNotification(subscription, token);
-        console.log("Notifikasi unsubscribed di server");
-      }
+              const token = AuthModel.getToken();
+              if (token) {
+                await Api.unsubscribeNotification(subscription, token);
+                console.log("Notifikasi unsubscribed di server");
+              }
 
-      pushSubBtn.textContent = "Subscribe Notifikasi";
-      LoadingPopupPresenter.updateMessage('Unsub... See you!');
-    } catch (error) {
-      console.error(error);
-      LoadingPopupPresenter.updateMessage('Ups! Gagal unsubscribe.');
-    } finally {
-      setTimeout(() => LoadingPopupPresenter.hide(), 2000);
-    }
-  } else {
-    LoadingPopupPresenter.showLoading('Memproses langganan notifikasi...');
+              pushSubBtn.textContent = "Subscribe Notifikasi";
+              LoadingPopupPresenter.updateMessage("Unsub... See you!");
+            } catch (error) {
+              console.error(error);
+              LoadingPopupPresenter.updateMessage("Ups! Gagal unsubscribe.");
+            } finally {
+              setTimeout(() => LoadingPopupPresenter.hide(), 2000);
+            }
+          } else {
+            LoadingPopupPresenter.showLoading(
+              "Memproses langganan notifikasi...",
+            );
 
-    try {
-      const permission = await Notification.requestPermission();
-      if (permission !== "granted") {
-        alert("Izin push notification ditolak.");
-        LoadingPopupPresenter.hide();
-        return;
-      }
+            try {
+              const permission = await Notification.requestPermission();
+              if (permission !== "granted") {
+                alert("Izin push notification ditolak.");
+                LoadingPopupPresenter.hide();
+                return;
+              }
 
-      const newSubscription = await registration.pushManager.subscribe({
-        userVisibleOnly: true,
-        applicationServerKey: urlBase64ToUint8Array(
-          "BCCs2eonMI-6H2ctvFaWg-UYdDv387Vno_bzUzALpB442r2lCnsHmtrx8biyPi_E-1fSGABK_Qs_GlvPoJJqxbk"
-        ),
-      });
-      console.log("Push subscription baru:", newSubscription);
+              const newSubscription = await registration.pushManager.subscribe({
+                userVisibleOnly: true,
+                applicationServerKey: urlBase64ToUint8Array(
+                  "BCCs2eonMI-6H2ctvFaWg-UYdDv387Vno_bzUzALpB442r2lCnsHmtrx8biyPi_E-1fSGABK_Qs_GlvPoJJqxbk",
+                ),
+              });
+              console.log("Push subscription baru:", newSubscription);
 
-      const token = AuthModel.getToken();
-      if (token) {
-        await Api.subscribeNotification(newSubscription, token);
-        console.log("Subscription dikirim ke server");
-      }
+              const token = AuthModel.getToken();
+              if (token) {
+                await Api.subscribeNotification(newSubscription, token);
+                console.log("Subscription dikirim ke server");
+              }
 
-      pushSubBtn.textContent = "Unsubscribe Notifikasi";
-      LoadingPopupPresenter.updateMessage('Subscribe berhasil! Yeay 🎉');
-    } catch (error) {
-      console.error(error);
-      LoadingPopupPresenter.updateMessage('Ups! Gagal subscribe.');
-    } finally {
-      setTimeout(() => LoadingPopupPresenter.hide(), 2000);
-    }
-  }
-});
-
+              pushSubBtn.textContent = "Unsubscribe Notifikasi";
+              LoadingPopupPresenter.updateMessage(
+                "Subscribe berhasil! Yeay 🎉",
+              );
+            } catch (error) {
+              console.error(error);
+              LoadingPopupPresenter.updateMessage("Ups! Gagal subscribe.");
+            } finally {
+              setTimeout(() => LoadingPopupPresenter.hide(), 2000);
+            }
+          }
+        });
       } catch (err) {
         console.error("Error handling push subscription:", err);
       }
@@ -148,7 +154,9 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   function urlBase64ToUint8Array(base64String) {
     const padding = "=".repeat((4 - (base64String.length % 4)) % 4);
-    const base64 = (base64String + padding).replace(/-/g, "+").replace(/_/g, "/");
+    const base64 = (base64String + padding)
+      .replace(/-/g, "+")
+      .replace(/_/g, "/");
     const rawData = window.atob(base64);
     const outputArray = new Uint8Array(rawData.length);
     for (let i = 0; i < rawData.length; ++i) {

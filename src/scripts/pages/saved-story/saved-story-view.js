@@ -31,7 +31,7 @@ const SavedStoryView = {
             <button class="delete-button" aria-label="Hapus Story">Hapus</button>
           </div>
         </div>
-      `
+      `,
       )
       .join("");
 

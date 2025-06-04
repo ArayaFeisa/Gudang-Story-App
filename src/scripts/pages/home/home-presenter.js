@@ -19,7 +19,11 @@ export default class HomePresenter {
       HomeView.renderStories(listStory);
       HomeView.renderMap(listStory);
 
-      this.sendPushNotification("Semua story telah dimuat!", "Beranda sudah diperbarui.", "/");
+      this.sendPushNotification(
+        "Semua story telah dimuat!",
+        "Beranda sudah diperbarui.",
+        "/",
+      );
     } catch (error) {
       HomeView.showErrorMessage("Gagal memuat stories. Coba lagi nanti.");
     }

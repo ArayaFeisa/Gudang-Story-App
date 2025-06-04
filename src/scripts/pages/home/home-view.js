@@ -56,26 +56,29 @@ const HomeView = {
       saveButton.className = "save-button";
 
       saveButton.addEventListener("click", async () => {
-  try {
-    LoadingPopupPresenter.showLoading("Menyimpan story...");
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    const existingStory = await StoryIDB.getStory(story.id);
+        try {
+          LoadingPopupPresenter.showLoading("Menyimpan story...");
+          await new Promise((resolve) => setTimeout(resolve, 500));
+          const existingStory = await StoryIDB.getStory(story.id);
 
-    if (existingStory) {
-      LoadingPopupPresenter.updateMessage("Story sudah pernah disimpan sebelumnya.");
-    } else {
-      await StoryIDB.putStory(story);
-      LoadingPopupPresenter.updateMessage("Story berhasil disimpan!");
-    }
+          if (existingStory) {
+            LoadingPopupPresenter.updateMessage(
+              "Story sudah pernah disimpan sebelumnya.",
+            );
+          } else {
+            await StoryIDB.putStory(story);
+            LoadingPopupPresenter.updateMessage("Story berhasil disimpan!");
+          }
 
-    setTimeout(() => LoadingPopupPresenter.hide(), 2000);
-  } catch (error) {
-    console.error("Gagal memproses penyimpanan story:", error);
-    LoadingPopupPresenter.updateMessage("Terjadi kesalahan saat menyimpan story.");
-    setTimeout(() => LoadingPopupPresenter.hide(), 2000);
-  }
-});
-
+          setTimeout(() => LoadingPopupPresenter.hide(), 2000);
+        } catch (error) {
+          console.error("Gagal memproses penyimpanan story:", error);
+          LoadingPopupPresenter.updateMessage(
+            "Terjadi kesalahan saat menyimpan story.",
+          );
+          setTimeout(() => LoadingPopupPresenter.hide(), 2000);
+        }
+      });
 
       storyItem.querySelector(".story-content").appendChild(saveButton);
       container.appendChild(storyItem);

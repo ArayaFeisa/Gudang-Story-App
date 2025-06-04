@@ -111,7 +111,6 @@
   background-color: #4fa358;
 }
 
-
 @media (max-width: 768px) {
   .story-item {
     flex-direction: column;
