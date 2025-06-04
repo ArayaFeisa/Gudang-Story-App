@@ -1,4 +1,4 @@
-APP_URL=http://localhost:9000/
+APP_URL=https://gudang-story-app.netlify.app/
 MAP_SERVICE_API_KEY=https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}
 https://stamen.com
 http://creativecommons.org/licenses/by/3.0
