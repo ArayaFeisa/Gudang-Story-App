@@ -9,61 +9,27 @@ module.exports = merge(common, {
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /\.css$/i,
         use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       {
-        test: /\.js$/,
+        test: /\.js$/i,
         exclude: /node_modules/,
-        use: [
-          {
-            loader: "babel-loader",
-            options: {
-              presets: ["@babel/preset-env"],
-            },
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env"],
           },
-        ],
+        },
       },
     ],
   },
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(),
-    new WorkboxWebpackPlugin.GenerateSW({
-      clientsClaim: true,
-      skipWaiting: true,
-      runtimeCaching: [
-        {
-          urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp)$/,
-          handler: "CacheFirst",
-          options: {
-            cacheName: "images",
-            expiration: {
-              maxEntries: 50,
-              maxAgeSeconds: 30 * 24 * 60 * 60,
-            },
-          },
-        },
-        {
-          urlPattern: /\.(?:css|js)$/,
-          handler: "StaleWhileRevalidate",
-          options: {
-            cacheName: "static-resources",
-          },
-        },
-
-        {
-          urlPattern: /^https:\/\/(api\.example\.com|another\.api\.com)/,
-          handler: "NetworkFirst",
-          options: {
-            cacheName: "api-cache",
-            networkTimeoutSeconds: 10,
-            expiration: {
-              maxEntries: 30,
-            },
-          },
-        },
-      ],
+    new WorkboxWebpackPlugin.InjectManifest({
+      swSrc: "./src/sw.js",
+      swDest: "service-worker.js",
     }),
   ],
 });

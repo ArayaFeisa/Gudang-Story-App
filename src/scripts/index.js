@@ -88,7 +88,6 @@ document.addEventListener("DOMContentLoaded", async () => {
             LoadingPopupPresenter.showLoading(
               "Memproses berhenti langganan...",
             );
-
             try {
               await subscription.unsubscribe();
               console.log("Unsubscribed dari push server");
